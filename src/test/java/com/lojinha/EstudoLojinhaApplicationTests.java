@@ -1,4 +1,4 @@
-package com.lojinha.estudo_lojinha;
+package com.lojinha;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
