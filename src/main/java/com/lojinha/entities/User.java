@@ -3,6 +3,8 @@ package com.lojinha.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +19,14 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+
+    /**
+     * Esse é o lado um para muitos (1...*) Onde 1 cliente pode ter muitos pedidos.
+     * Colocomos dentro a anotation @OneToMany e entre parenteses colocamos o nome do atributo
+     * do outro lado da associação, no caso "client" que é o atributo de Order
+     */
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>(); //como é uma coleção já se instancia ela
 
     public User() {
     }
@@ -67,6 +77,11 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    //por se tratar de uma coleção utiliza-se apenas o GET
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override
