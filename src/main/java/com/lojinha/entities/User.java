@@ -1,5 +1,6 @@
 package com.lojinha.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -25,6 +26,7 @@ public class User implements Serializable {
      * Colocomos dentro a anotation @OneToMany e entre parenteses colocamos o nome do atributo
      * do outro lado da associação, no caso "client" que é o atributo de Order
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>(); //como é uma coleção já se instancia ela
 

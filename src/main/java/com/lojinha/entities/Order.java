@@ -1,5 +1,6 @@
 package com.lojinha.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class Order implements Serializable {
     /**
      * A partir da versão 8 do Java utiliza-se a classe Instant ao inves de Date para registrar o instante.
      */
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
 
