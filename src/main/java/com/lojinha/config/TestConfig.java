@@ -1,8 +1,10 @@
 package com.lojinha.config;
 
+import com.lojinha.entities.Category;
 import com.lojinha.entities.Order;
 import com.lojinha.entities.User;
 import com.lojinha.entities.enums.OrderStatus;
+import com.lojinha.repositories.CategoryRepository;
 import com.lojinha.repositories.OrderRepository;
 import com.lojinha.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,15 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
 
         User user1 = new User(null, "Junior", "jr@gmail.com", "911111111", "123");
         User user2 = new User(null, "Clara", "cla@gmail.com", "922222222", "123");
@@ -33,6 +42,7 @@ public class TestConfig implements CommandLineRunner {
         Order order2 = new Order(null, Instant.parse("2025-05-30T02:53:05Z"), OrderStatus.WAITING_PAYMENT, user2);
         Order order3 = new Order(null, Instant.parse("2025-05-30T03:30:05Z"), OrderStatus.WAITING_PAYMENT, user1);
 
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
 
