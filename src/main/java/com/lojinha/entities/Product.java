@@ -25,7 +25,8 @@ public class Product implements Serializable {
      * não tera mais de uma ocorrencia da mesma categoria, o mesmo produto
      * não pode ter uma mesma categoria mais de uma vez
      */
-    @Transient
+    @ManyToMany
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
     public Product() {
