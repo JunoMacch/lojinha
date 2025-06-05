@@ -1,14 +1,8 @@
 package com.lojinha.config;
 
-import com.lojinha.entities.Category;
-import com.lojinha.entities.Order;
-import com.lojinha.entities.Product;
-import com.lojinha.entities.User;
+import com.lojinha.entities.*;
 import com.lojinha.entities.enums.OrderStatus;
-import com.lojinha.repositories.CategoryRepository;
-import com.lojinha.repositories.OrderRepository;
-import com.lojinha.repositories.ProductRepository;
-import com.lojinha.repositories.UserRepository;
+import com.lojinha.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -66,6 +63,13 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(user1, user2));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
+
+        OrderItem orderiItem1 = new OrderItem(order1, p1, 2, p1.getPrice());
+        OrderItem orderiItem2 = new OrderItem(order1, p3, 1, p4.getPrice());
+        OrderItem orderiItem3 = new OrderItem(order2, p3, 2, p1.getPrice());
+        OrderItem orderiItem4 = new OrderItem(order3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(orderiItem1, orderiItem2, orderiItem3, orderiItem4));
 
     }
 }

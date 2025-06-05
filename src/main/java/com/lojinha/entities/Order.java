@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * O nome da tabela foi alterado devido Order ser um nome exclusivo do banco de dados
@@ -29,7 +31,6 @@ public class Order implements Serializable {
 
     private Integer orderStatus;
 
-
     /**
      * Esse é o lado muitos para um (*...1) Onde muitos pedidos podem ter 1 cliente
      * Para instruir o jpa para transformar esse atributo em uma chave estrangeira
@@ -40,6 +41,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
     }
@@ -83,6 +87,10 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public Set<OrderItem> getItems () {
+        return items;
     }
 
     @Override
